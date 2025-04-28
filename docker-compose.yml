@@ -18,6 +18,7 @@ services:
       BACKEND: http://web:8000
       SERVER_NAME: localhost
       MODSEC_RULE_ENGINE: On
+      CORS_HEADER_403_CONTENT_TYPE: "text/html"
     volumes:
       - ./nginx/location_common.conf:/etc/nginx/templates/includes/location_common.conf:ro
     depends_on:
