@@ -1,0 +1,25 @@
+services:
+  web:
+    build:
+      context: .
+    container_name: django-waf
+    working_dir: /app
+    command: gunicorn waf.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - "8000"
+    volumes:
+      - ./waf:/app
+  nginx-waf:
+    image: owasp/modsecurity-crs:nginx
+    container_name: nginx-waf
+    ports:
+      - "80:8080"
+    environment:
+      BACKEND: http://web:8000
+      SERVER_NAME: localhost
+      MODSEC_RULE_ENGINE: On
+    volumes:
+      - ./nginx/location_common.conf:/etc/nginx/templates/includes/location_common.conf:ro
+    depends_on:
+      - web
+
