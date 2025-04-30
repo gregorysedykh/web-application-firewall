@@ -19,8 +19,14 @@ services:
       SERVER_NAME: localhost
       MODSEC_RULE_ENGINE: On
       CORS_HEADER_403_CONTENT_TYPE: "text/html"
+
+      MODSEC_AUDIT_ENGINE: On
+      MODSEC_AUDIT_LOG_FORMAT: Native
+      MODSEC_AUDIT_LOG: /var/log/modsecurity/audit.log
+      MODSEC_AUDIT_LOG_PARTS: ABIJDEFHZ
     volumes:
       - ./nginx/location_common.conf:/etc/nginx/templates/includes/location_common.conf:ro
+      - ./logs/modsecurity:/var/log/modsecurity
     depends_on:
       - web
 
