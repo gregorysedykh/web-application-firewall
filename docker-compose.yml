@@ -21,10 +21,12 @@ services:
       SERVER_NAME: localhost      
       CORS_HEADER_403_CONTENT_TYPE: "text/html"
 
+      BLOCKING_PARANOIA: 3
+
       MODSEC_AUDIT_ENGINE: On
       MODSEC_AUDIT_LOG_FORMAT: Native
       MODSEC_AUDIT_LOG: /var/log/modsecurity/audit.log
-      MODSEC_AUDIT_LOG_PARTS: ABIJDEFHZ
+      MODSEC_AUDIT_LOG_PARTS: ABCEFHZ
 
     volumes:
       - ./logs/modsecurity:/var/log/modsecurity
